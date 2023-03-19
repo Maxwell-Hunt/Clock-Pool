@@ -2,7 +2,9 @@ class Clock {
     constructor(obj, time, is_active=false) {
         this.obj = obj;
         this.time = time;
-        this.is_active = is_active;
+        this.is_active = !is_active;
+        this.updateActivity();
+        this.update();
     }
 
     // returns a string which displays the current amount of time
@@ -18,7 +20,7 @@ class Clock {
         return result;
     }
 
-    update_activity() {
+    updateActivity() {
         this.is_active = !this.is_active;
         for(let child of this.obj.childNodes) {
             if(child.tagName === "P") {
@@ -41,12 +43,21 @@ class Clock {
     }
 }
 
-let clock1 = new Clock(document.getElementById("clock1"), 900, is_active = true);
-let clock2 = new Clock(document.getElementById("clock2"), 900)
-
+let game_started = false;
+let clock1 = new Clock(document.getElementById("clock1"), 900);
+let clock2 = new Clock(document.getElementById("clock2"), 900);
 let active_clock = 1;
 
+function beginGame() {
+    console.log("Hello");
+    game_started = true;
+    active_clock = 1;
+    clock1 = new Clock(document.getElementById("clock1"), 900, is_active = true);
+    clock2 = new Clock(document.getElementById("clock2"), 900);
+}
+
 function update() {
+    if(!game_started) return;
     if(active_clock == 1) {
         
         clock1.update();
@@ -54,14 +65,12 @@ function update() {
     else if(active_clock == 2) {
         clock2.update();
     }
-    if(clock1.time == 0) {
-
-    }
 }
 
 function switchClock(event) {
-    clock1.update_activity();
-    clock2.update_activity();
+    if(!game_started) return;
+    clock1.updateActivity();
+    clock2.updateActivity();
     if(active_clock == 1) {
         active_clock = 2;
         return;
