@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clock_container  {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.clock {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clock h1 {
+    font-size: 8em;
+}
+
+.clock p {
+    font-size: 2em;
+}
+
+.instruction_text {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
