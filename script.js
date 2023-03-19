@@ -41,7 +41,7 @@ class Clock {
     }
 }
 
-let clock1 = new Clock(document.getElementById("clock1"), 845, is_active = true);
+let clock1 = new Clock(document.getElementById("clock1"), 900, is_active = true);
 let clock2 = new Clock(document.getElementById("clock2"), 900)
 
 let active_clock = 1;
