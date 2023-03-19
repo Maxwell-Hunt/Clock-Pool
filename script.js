@@ -49,7 +49,6 @@ let clock2 = new Clock(document.getElementById("clock2"), 900);
 let active_clock = 1;
 
 function beginGame() {
-    console.log("Hello");
     game_started = true;
     active_clock = 1;
     clock1 = new Clock(document.getElementById("clock1"), 900, is_active = true);
