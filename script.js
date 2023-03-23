@@ -65,8 +65,12 @@ function updateTimes() {
     if(game_started) return;
     let time1 = document.getElementById("first_player_time_input");
     let time2 = document.getElementById("second_player_time_input");
-    clock1_time_initial = Number(time1.value);
-    clock2_time_initial = Number(time2.value);
+    if(time1.value != "") {
+        clock1_time_initial = Number(time1.value);
+    }
+    if(time2.value != "") {
+        clock2_time_initial = Number(time2.value);
+    }
     resetGame();
 }
 
