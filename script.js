@@ -43,11 +43,15 @@ class Clock {
     }
 }
 
+let clock1_time_initial = 900;
+let clock2_time_initial = 900;
 let game_started = false;
-let clock1 = new Clock(document.getElementById("clock1"), 900);
-let clock2 = new Clock(document.getElementById("clock2"), 900);
+let clock1 = new Clock(document.getElementById("clock1"), clock1_time_initial);
+let clock2 = new Clock(document.getElementById("clock2"), clock2_time_initial);
 let start_button = document.getElementById("start");
 let active_clock = 1;
+
+let time_change_section = document.getElementsByClassName("time_change")[0];
 
 function toggleState() {
     if(!game_started) {
@@ -57,24 +61,34 @@ function toggleState() {
     }
 }
 
+function updateTimes() {
+    if(game_started) return;
+    let time1 = document.getElementById("first_player_time_input");
+    let time2 = document.getElementById("second_player_time_input");
+    clock1_time_initial = Number(time1.value);
+    clock2_time_initial = Number(time2.value);
+    resetGame();
+}
+
 function resetGame() {
+    time_change_section.style.display = "block";
     game_started = false;
     start_button.innerHTML = "Start";
-    clock1 = new Clock(document.getElementById("clock1"), 900);
-    clock2 = new Clock(document.getElementById("clock2"), 900);
+    clock1 = new Clock(document.getElementById("clock1"), clock1_time_initial);
+    clock2 = new Clock(document.getElementById("clock2"), clock2_time_initial);
 }
 
 function beginGame() {
+    time_change_section.style.display = "none";
     active_clock = 1;
     game_started = true;
-    clock1 = new Clock(document.getElementById("clock1"), 900, is_active=true);
-    clock2 = new Clock(document.getElementById("clock2"), 900);
+    clock1 = new Clock(document.getElementById("clock1"), clock1_time_initial, is_active=true);
+    clock2 = new Clock(document.getElementById("clock2"), clock2_time_initial);
     start_button.innerHTML = "Restart";
 }
 
 function update() {
     if(!game_started) return;
-    console.log("hello wold");
     if(active_clock === 1) {
         clock1.update();
     }
@@ -83,7 +97,7 @@ function update() {
     }
 }
 
-function switchClock(event) {
+function switchClock() {
     if(!game_started) return;
     clock1.updateActivity();
     clock2.updateActivity();
@@ -104,9 +118,9 @@ function addTime() {
 }
 
 document.addEventListener("keyup", (e) => {
-    if(e.keyCode === 32) {
+    if(e.key === " ") {
         switchClock();
-    } else if (e.keyCode === 13) {
+    } else if (e.key === "Enter") {
         addTime();
     }
 });
